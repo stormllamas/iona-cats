@@ -1,0 +1,29 @@
+{
+  "semi": true,
+  "singleQuote": false,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "printWidth": 80,
+  "importOrder": [
+    "^(react(/|-)(.*)$)|^(react$)",
+    "^(@okta(/|-)(.*)$)|^(@okta$)",
+    "^(ol(/|-)(.*)$)|^(ol$)",
+    "^(@deck.gl(/|-)(.*)$)|^(@deck.gl$)",
+    "^(deck.gl(/|-)(.*)$)|^(deck.gl$)",
+    "^(@mui(/|-)(.*)$)|^(@mui$)",
+    "<THIRD_PARTY_MODULES>",
+    "types/(.*)$",
+    "configs/(.*)$",
+    "constants/(.*)$",
+    "components/(.*)$",
+    "store/(.*)$",
+    "customHooks/(.*)$",
+    "services/(.*)$",
+    "utils/(.*)$",
+    "^(?!(.*)assets/)[./](.*)$",
+    "assets/"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}

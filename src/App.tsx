@@ -1,16 +1,20 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import ThemeProvider from "react-bootstrap/esm/ThemeProvider";
+
 import Home from "./components/pages/Home";
 import CatDetail from "./components/pages/CatDetail";
 
 import "./assets/scss/main.scss";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
-import { loader as catLoader } from "./loaders/cat";
+import { catBreedsLoader, catLoader } from "./loaders/cat";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+    loader: catBreedsLoader,
   },
   {
     path: "cats/:catId",
@@ -22,7 +26,12 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      <ThemeProvider
+        breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
+        minBreakpoint="xxs"
+      >
+        <RouterProvider router={router} />;
+      </ThemeProvider>
     </div>
   );
 };

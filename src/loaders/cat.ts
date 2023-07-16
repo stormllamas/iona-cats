@@ -1,9 +1,14 @@
-import { getCatDetail } from "../services/cat";
-import { CatLoader } from "../types/cat";
+import { getCatBreeds, getCatDetail } from "../services/cat";
+import { CatBreedsLoader, CatLoader } from "../types/cat";
 
-export const loader: CatLoader = async ({ params }) => {
+export const catLoader: CatLoader = async ({ params }) => {
   const catDetail = await getCatDetail(params.catId);
   if (!catDetail) return;
-  console.log("catDetail", catDetail);
   return catDetail;
+};
+
+export const catBreedsLoader: CatBreedsLoader = async () => {
+  const catBreeds = await getCatBreeds();
+  if (!catBreeds) return;
+  return catBreeds;
 };

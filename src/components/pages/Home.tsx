@@ -5,6 +5,9 @@ import { Form, Container, Row, Col, Button } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
 
 import { CatBreed } from "../../types/cat";
+
+import CatPreview from "../content/CatPreview";
+
 import usePaginatedCats from "../../customHooks/usePaginatedCats";
 
 const Home = () => {
@@ -29,7 +32,7 @@ const Home = () => {
       <Row className="py-2">
         <h1>Cat Loader</h1>
       </Row>
-      <Row>
+      <Row className="py-2 mb-4">
         <Col lg={4} md={3} sm={6}>
           <Form.Select
             aria-label="Select breed"
@@ -47,16 +50,20 @@ const Home = () => {
         </Col>
       </Row>
       <Row>
-        <Col>
-          {!catsByBreedLoading && !catsByBreed?.length && (
+        {!catsByBreedLoading && !catsByBreed?.length && (
+          <Col>
             <h2>No Cats Available</h2>
-          )}
-          {catsByBreed?.length ? (
-            catsByBreed.map((cat) => <p key={cat.id}>{cat.id}</p>)
-          ) : (
-            <></>
-          )}
-        </Col>
+          </Col>
+        )}
+        {catsByBreed?.length ? (
+          catsByBreed.map((cat) => (
+            <Col key={cat.id} md={3} sm={6}>
+              <CatPreview cat={cat} />
+            </Col>
+          ))
+        ) : (
+          <></>
+        )}
       </Row>
       <Row>
         <Col>

@@ -1,6 +1,6 @@
 export const DEFAULT_CAT_STORE_VALUE = {
   selectedBreed: "",
-  catsByBreedPage: 0,
+  catsByBreedPage: 1,
 };
 
 export const DEFAULT_CAT_CONTEXT_VALUE = {

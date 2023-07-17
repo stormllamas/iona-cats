@@ -12,7 +12,10 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import { catBreedsLoader, catLoader } from "./loaders/cat";
 import { createContext, useState } from "react";
-import { DEFAULT_CAT_CONTEXT_VALUE } from "./constants/catStore";
+import {
+  DEFAULT_CAT_CONTEXT_VALUE,
+  DEFAULT_CAT_STORE_VALUE,
+} from "./constants/catStore";
 
 const router = createBrowserRouter([
   {
@@ -32,10 +35,7 @@ export const CatContext = createContext<CatContextType>(
 );
 
 const App = () => {
-  const [catStore, setCatStore] = useState({
-    selectedBreed: "",
-    catsByBreedPage: 0,
-  });
+  const [catStore, setCatStore] = useState(DEFAULT_CAT_STORE_VALUE);
 
   const updateSelectedBreed = (selectedBreed: string) => {
     setCatStore((prev) => ({

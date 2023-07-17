@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import ThemeProvider from "react-bootstrap/esm/ThemeProvider";
 
+import { CatContextType } from "./types/context/general";
+
 import Home from "./components/pages/Home";
 import CatDetail from "./components/pages/CatDetail";
 
@@ -9,6 +11,8 @@ import "./assets/scss/main.scss";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import { catBreedsLoader, catLoader } from "./loaders/cat";
+import { createContext, useState } from "react";
+import { DEFAULT_CAT_CONTEXT_VALUE } from "./constants/catStore";
 
 const router = createBrowserRouter([
   {
@@ -23,16 +27,39 @@ const router = createBrowserRouter([
   },
 ]);
 
+export const CatContext = createContext<CatContextType>(
+  DEFAULT_CAT_CONTEXT_VALUE
+);
+
 const App = () => {
+  const [catStore, setCatStore] = useState({
+    selectedBreed: "",
+    catsByBreedPage: 0,
+  });
+
+  const updateSelectedBreed = (selectedBreed: string) => {
+    setCatStore((prev) => ({
+      ...prev,
+      selectedBreed,
+    }));
+  };
+
+  const catContextValue = {
+    catStore,
+    updateSelectedBreed,
+  };
+
   return (
-    <div className="App">
-      <ThemeProvider
-        breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
-        minBreakpoint="xxs"
-      >
-        <RouterProvider router={router} />;
-      </ThemeProvider>
-    </div>
+    <CatContext.Provider value={catContextValue}>
+      <div className="App">
+        <ThemeProvider
+          breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
+          minBreakpoint="xxs"
+        >
+          <RouterProvider router={router} />;
+        </ThemeProvider>
+      </div>
+    </CatContext.Provider>
   );
 };
 

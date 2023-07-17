@@ -40,6 +40,7 @@ const usePaginatedCats = () => {
     loading,
     data,
     error,
+    setData,
   };
 };
 export default usePaginatedCats;

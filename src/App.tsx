@@ -40,6 +40,7 @@ const App = () => {
   const updateSelectedBreed = (selectedBreed: string) => {
     setCatStore((prev) => ({
       ...prev,
+      catsByBreedPage: 1,
       selectedBreed,
     }));
   };

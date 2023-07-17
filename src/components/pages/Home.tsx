@@ -1,4 +1,4 @@
-import { useCallback, useContext } from "react";
+import { ChangeEvent, useCallback, useContext } from "react";
 import { CatContext } from "../../App";
 
 import { Form, Container, Row, Col, Button } from "react-bootstrap";
@@ -21,7 +21,16 @@ const Home = () => {
     loading: catsByBreedLoading,
     data: catsByBreed,
     // error: catsByBreedError,
+    setData,
   } = usePaginatedCats();
+
+  const handleBreedSelect = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      setData([]);
+      updateSelectedBreed(event.target.value);
+    },
+    [updateSelectedBreed, setData]
+  );
 
   const handleLoadMore = useCallback(() => {
     updateCatsByBreedPage(catsByBreedPage + 1);
@@ -39,7 +48,7 @@ const Home = () => {
           <Form.Select
             aria-label="Select breed"
             value={selectedBreed}
-            onChange={(event) => updateSelectedBreed(event.target.value)}
+            onChange={handleBreedSelect}
             disabled={catsByBreedLoading}
           >
             <option>Select breed</option>

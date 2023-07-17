@@ -20,7 +20,7 @@ const CatDetail = () => {
         <Col>
           <Card>
             <Card.Header>
-              <Link to="/">
+              <Link to={`/?breed=${catBreedInfo.id}`}>
                 <Button variant="primary">Back</Button>
               </Link>
             </Card.Header>

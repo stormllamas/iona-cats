@@ -19,7 +19,7 @@ export const getCatPageByBreed: CatPageByBreedRequest = async (
   breed
 ) => {
   const catBreeds: CatPageByBreedData = await axios.get(
-    `${CATAPI_ENDPOINT}/images/search?page=${page}&limit=${limit}&breed=${breed}`
+    `${CATAPI_ENDPOINT}/images/search?page=${page}&limit=${limit}&breed_id=${breed}`
   );
   return catBreeds.data;
 };

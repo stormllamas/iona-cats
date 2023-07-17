@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { CatContext } from "../../App";
 
 import { Form, Container, Row, Col, Button } from "react-bootstrap";
@@ -8,12 +8,21 @@ import { CatBreed } from "../../types/cat";
 import usePaginatedCats from "../../customHooks/usePaginatedCats";
 
 const Home = () => {
-  const { catStore, updateSelectedBreed } = useContext(CatContext);
-  const { selectedBreed } = catStore;
+  const { catStore, updateSelectedBreed, updateCatsByBreedPage } =
+    useContext(CatContext);
+  const { selectedBreed, catsByBreedPage } = catStore;
 
   const catBreeds = useLoaderData() as CatBreed[];
 
-  usePaginatedCats();
+  const {
+    loading: catsByBreedLoading,
+    data: catsByBreed,
+    // error: catsByBreedError,
+  } = usePaginatedCats();
+
+  const handleLoadMore = useCallback(() => {
+    updateCatsByBreedPage(catsByBreedPage + 1);
+  }, [catsByBreedPage, updateCatsByBreedPage]);
 
   return (
     <Container>
@@ -39,7 +48,23 @@ const Home = () => {
       </Row>
       <Row>
         <Col>
-          <Button disabled={!selectedBreed} variant="success">
+          {!catsByBreedLoading && !catsByBreed?.length && (
+            <h2>No Cats Available</h2>
+          )}
+          {catsByBreed?.length ? (
+            catsByBreed.map((cat) => <p key={cat.id}>{cat.id}</p>)
+          ) : (
+            <></>
+          )}
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Button
+            disabled={!selectedBreed}
+            variant="success"
+            onClick={handleLoadMore}
+          >
             Load More
           </Button>
         </Col>

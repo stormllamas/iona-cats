@@ -8,4 +8,7 @@ export const DEFAULT_CAT_CONTEXT_VALUE = {
   updateSelectedBreed: (breed: string) => {
     console.log(breed);
   },
+  updateCatsByBreedPage: (page: number) => {
+    console.log(page);
+  },
 };

@@ -4,4 +4,5 @@ export interface CatContextType {
     catsByBreedPage: number;
   };
   updateSelectedBreed: (a: string) => void;
+  updateCatsByBreedPage: (a: number) => void;
 }

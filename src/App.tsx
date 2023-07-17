@@ -44,9 +44,17 @@ const App = () => {
     }));
   };
 
+  const updateCatsByBreedPage = (catsByBreedPage: number) => {
+    setCatStore((prev) => ({
+      ...prev,
+      catsByBreedPage,
+    }));
+  };
+
   const catContextValue = {
     catStore,
     updateSelectedBreed,
+    updateCatsByBreedPage,
   };
 
   return (

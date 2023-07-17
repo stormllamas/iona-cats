@@ -9,29 +9,37 @@ const usePaginatedCats = () => {
   const { catStore } = useContext(CatContext);
   const { selectedBreed, catsByBreedPage } = catStore;
 
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState<CatPageByBreed[]>([]);
+  const [error, setError] = useState<unknown>();
 
   const fetchBreedPage = useCallback(async () => {
-    const nextPageRes = await getCatPageByBreed(
-      catsByBreedPage,
-      CATAPI_DEFAULT_LIMIT,
-      selectedBreed
-    );
-    if (nextPageRes?.length) {
-      setData((prev) => [...prev, ...nextPageRes]);
+    setLoading(true);
+    try {
+      const nextPageRes = await getCatPageByBreed(
+        catsByBreedPage,
+        CATAPI_DEFAULT_LIMIT,
+        selectedBreed
+      );
+      if (nextPageRes?.length) {
+        setData((prev) => [...prev, ...nextPageRes]);
+      }
+    } catch (error) {
+      setError(error);
     }
+    setLoading(false);
   }, [selectedBreed, catsByBreedPage]);
 
   useEffect(() => {
     if (catsByBreedPage && selectedBreed) {
       fetchBreedPage();
     }
-    console.log("selectedBreed", selectedBreed);
-    console.log("catsByBreedPage", catsByBreedPage);
-  }, [selectedBreed, catsByBreedPage]);
+  }, [selectedBreed, catsByBreedPage, fetchBreedPage]);
 
-  useEffect(() => {
-    console.log("data", data);
-  }, [data]);
+  return {
+    loading,
+    data,
+    error,
+  };
 };
 export default usePaginatedCats;

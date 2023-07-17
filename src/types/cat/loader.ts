@@ -8,7 +8,7 @@ export interface CatBreedsLoader extends LoaderFunction {
 }
 
 export type CatLoaderParams = { params: { catId: ID } };
-export type CatLoaderResponse = CatDetail | undefined;
+export type CatLoaderResponse = CatDetail;
 export interface CatLoader extends LoaderFunction {
-  (props: CatLoaderParams): Promise<CatLoaderResponse>;
+  (props: CatLoaderParams): Promise<CatLoaderResponse | undefined>;
 }

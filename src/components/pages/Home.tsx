@@ -30,7 +30,9 @@ const Home = () => {
   return (
     <Container>
       <Row className="py-2">
-        <h1>Cat Loader</h1>
+        <Col>
+          <h1>Cat Loader</h1>
+        </Col>
       </Row>
       <Row className="py-2 mb-4">
         <Col lg={4} md={3} sm={6}>
@@ -38,6 +40,7 @@ const Home = () => {
             aria-label="Select breed"
             value={selectedBreed}
             onChange={(event) => updateSelectedBreed(event.target.value)}
+            disabled={catsByBreedLoading}
           >
             <option>Select breed</option>
             {catBreeds?.length &&
@@ -49,7 +52,7 @@ const Home = () => {
           </Form.Select>
         </Col>
       </Row>
-      <Row>
+      <Row className="py-2 mb-4">
         {!catsByBreedLoading && !catsByBreed?.length && (
           <Col>
             <h2>No Cats Available</h2>
@@ -68,11 +71,11 @@ const Home = () => {
       <Row>
         <Col>
           <Button
-            disabled={!selectedBreed}
+            disabled={!selectedBreed || catsByBreedLoading}
             variant="success"
             onClick={handleLoadMore}
           >
-            Load More
+            {catsByBreedLoading ? "Loading cats..." : "Load More"}
           </Button>
         </Col>
       </Row>

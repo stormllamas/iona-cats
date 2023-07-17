@@ -1,8 +1,8 @@
 import { Card, Button } from "react-bootstrap";
-import { CatPageByBreed } from "../../types/cat";
+import { CatBreed } from "../../types/cat";
 import { Link } from "react-router-dom";
 
-const CatPreview = ({ cat }: { cat: CatPageByBreed }) => {
+const CatPreview = ({ cat }: { cat: CatBreed }) => {
   return (
     <Card>
       <Card.Img variant="top" src={cat.url} />

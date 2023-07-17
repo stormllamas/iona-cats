@@ -5,6 +5,9 @@ export type CatBreed = {
   id: string;
   name: string;
   description: string;
+  origin: string;
+  temperament: string;
+  url: string;
 };
 
 export type CatBreedsResponse = Promise<CatBreed[] | undefined>;
@@ -14,12 +17,7 @@ export interface CatBreedsRequest {
 }
 
 // Breeds By Page
-export type CatPageByBreed = {
-  id: string;
-  url: string;
-};
-
-export type CatPageByBreedResponse = Promise<CatPageByBreed[] | undefined>;
+export type CatPageByBreedResponse = Promise<CatBreed[] | undefined>;
 export type CatPageByBreedData = { data: CatPageByBreedResponse };
 export interface CatPageByBreedRequest {
   (page: number, limit: number, breed: string): CatPageByBreedResponse;
@@ -27,11 +25,13 @@ export interface CatPageByBreedRequest {
 
 // Single Cat Detail
 export interface CatDetail {
-  data: string;
+  id: string;
+  url: string;
+  breeds: CatBreed[];
 }
 
 export type CatDetailParams = ID | undefined;
-export type CatDetailResponse = Promise<CatDetail | undefined>;
+export type CatDetailResponse = Promise<CatDetail>;
 export type CatDetailData = { data: CatDetailResponse };
 
 export interface CatDetailRequest {

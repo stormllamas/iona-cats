@@ -3,14 +3,14 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { CatContext } from "../App";
 import { CATAPI_DEFAULT_LIMIT } from "../constants/cat";
 import { getCatPageByBreed } from "../services/cat";
-import { CatPageByBreed } from "../types/cat";
+import { CatBreed } from "../types/cat";
 
 const usePaginatedCats = () => {
   const { catStore } = useContext(CatContext);
   const { selectedBreed, catsByBreedPage } = catStore;
 
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<CatPageByBreed[]>([]);
+  const [data, setData] = useState<CatBreed[]>([]);
   const [error, setError] = useState<unknown>();
 
   const fetchBreedPage = useCallback(async () => {

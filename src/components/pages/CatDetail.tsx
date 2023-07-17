@@ -1,19 +1,42 @@
-import { useEffect } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useEffect, useMemo } from "react";
+import { useLoaderData, Link } from "react-router-dom";
 import { CatLoaderResponse } from "../../types/cat";
+
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 const CatDetail = () => {
   const catDetail = useLoaderData() as CatLoaderResponse;
+  const { breeds, url } = catDetail;
+
+  const catBreedInfo = useMemo(() => breeds[0], [breeds]);
 
   useEffect(() => {
-    console.log("catDetail", catDetail);
-  }, [catDetail]);
+    console.log("breeds", breeds);
+  }, [breeds]);
 
   return (
-    <header className="section-header">
-      {/* {catDetail ? parser.parseFromString(catDetail, "text/html") : ""} */}
-      <h1>CatDetails</h1>
-    </header>
+    <Container>
+      <Row className="py-2">
+        <Col>
+          <Card>
+            <Card.Header>
+              <Link to="/">
+                <Button variant="primary">Back</Button>
+              </Link>
+            </Card.Header>
+            <Card.Img variant="top" src={url} />
+            <Card.Body>
+              <Card.Title>
+                {catBreedInfo?.name || "No Name Available"}
+              </Card.Title>
+              <h5>Origin: {catBreedInfo?.origin}</h5>
+              <h6>{catBreedInfo?.temperament}</h6>
+              <Card.Text>{catBreedInfo?.description}</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

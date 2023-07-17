@@ -1,8 +1,8 @@
-import { ChangeEvent, useCallback, useContext } from "react";
+import { ChangeEvent, useCallback, useContext, useEffect } from "react";
 import { CatContext } from "../../App";
 
 import { Form, Container, Row, Col, Button } from "react-bootstrap";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useSearchParams } from "react-router-dom";
 
 import { CatBreed } from "../../types/cat";
 
@@ -17,10 +17,18 @@ const Home = () => {
 
   const catBreeds = useLoaderData() as CatBreed[];
 
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const queryStringBreed = searchParams.get("breed");
+    if (queryStringBreed) {
+      updateSelectedBreed(queryStringBreed);
+    }
+  }, [searchParams]);
+
   const {
     loading: catsByBreedLoading,
     data: catsByBreed,
-    // error: catsByBreedError,
     setData,
   } = usePaginatedCats();
 

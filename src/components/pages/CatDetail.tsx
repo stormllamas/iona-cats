@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useLoaderData, Link } from "react-router-dom";
 import { CatLoaderResponse } from "../../types/cat";
 
@@ -9,10 +9,6 @@ const CatDetail = () => {
   const { breeds, url } = catDetail;
 
   const catBreedInfo = useMemo(() => breeds[0], [breeds]);
-
-  useEffect(() => {
-    console.log("breeds", breeds);
-  }, [breeds]);
 
   return (
     <Container>

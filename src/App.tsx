@@ -52,10 +52,18 @@ const App = () => {
     }));
   };
 
+  const updateEndOfCatsByBreedPage = (endOfCatsByBreedPage: boolean) => {
+    setCatStore((prev) => ({
+      ...prev,
+      endOfCatsByBreedPage,
+    }));
+  };
+
   const catContextValue = {
     catStore,
     updateSelectedBreed,
     updateCatsByBreedPage,
+    updateEndOfCatsByBreedPage,
   };
 
   return (

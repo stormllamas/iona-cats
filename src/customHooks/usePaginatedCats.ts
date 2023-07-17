@@ -7,7 +7,7 @@ import { CatBreed } from "../types/cat";
 import { returnUniqueArray } from "../utils/common/general";
 
 const usePaginatedCats = () => {
-  const { catStore } = useContext(CatContext);
+  const { catStore, updateEndOfCatsByBreedPage } = useContext(CatContext);
   const { selectedBreed, catsByBreedPage } = catStore;
 
   const [loading, setLoading] = useState(false);
@@ -25,6 +25,12 @@ const usePaginatedCats = () => {
       if (nextPageRes?.length) {
         setData((prev) => {
           const uniqueArray = returnUniqueArray<CatBreed>(prev, nextPageRes);
+          if (prev.length === uniqueArray.length) {
+            updateEndOfCatsByBreedPage(true);
+          } else {
+            updateEndOfCatsByBreedPage(false);
+          }
+
           return uniqueArray;
         });
       }

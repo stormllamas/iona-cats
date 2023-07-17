@@ -13,7 +13,7 @@ import usePaginatedCats from "../../customHooks/usePaginatedCats";
 const Home = () => {
   const { catStore, updateSelectedBreed, updateCatsByBreedPage } =
     useContext(CatContext);
-  const { selectedBreed, catsByBreedPage } = catStore;
+  const { selectedBreed, catsByBreedPage, endOfCatsByBreedPage } = catStore;
 
   const catBreeds = useLoaderData() as CatBreed[];
 
@@ -21,7 +21,7 @@ const Home = () => {
 
   useEffect(() => {
     const queryStringBreed = searchParams.get("breed");
-    if (queryStringBreed) {
+    if (queryStringBreed && updateSelectedBreed) {
       updateSelectedBreed(queryStringBreed);
     }
   }, [searchParams]);
@@ -85,17 +85,19 @@ const Home = () => {
           <></>
         )}
       </Row>
-      <Row>
-        <Col>
-          <Button
-            disabled={!selectedBreed || catsByBreedLoading}
-            variant="success"
-            onClick={handleLoadMore}
-          >
-            {catsByBreedLoading ? "Loading cats..." : "Load More"}
-          </Button>
-        </Col>
-      </Row>
+      {!endOfCatsByBreedPage && (
+        <Row>
+          <Col>
+            <Button
+              disabled={!selectedBreed || catsByBreedLoading}
+              variant="success"
+              onClick={handleLoadMore}
+            >
+              {catsByBreedLoading ? "Loading cats..." : "Load More"}
+            </Button>
+          </Col>
+        </Row>
+      )}
     </Container>
   );
 };

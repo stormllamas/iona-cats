@@ -1,6 +1,7 @@
 export const DEFAULT_CAT_STORE_VALUE = {
   selectedBreed: "",
   catsByBreedPage: 1,
+  endOfCatsByBreedPage: false,
 };
 
 export const DEFAULT_CAT_CONTEXT_VALUE = {
@@ -10,5 +11,8 @@ export const DEFAULT_CAT_CONTEXT_VALUE = {
   },
   updateCatsByBreedPage: (page: number) => {
     console.log(page);
+  },
+  updateEndOfCatsByBreedPage: (bool: boolean) => {
+    console.log(bool);
   },
 };

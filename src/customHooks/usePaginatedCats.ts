@@ -4,6 +4,7 @@ import { CatContext } from "../App";
 import { CATAPI_DEFAULT_LIMIT } from "../constants/cat";
 import { getCatPageByBreed } from "../services/cat";
 import { CatBreed } from "../types/cat";
+import { returnUniqueArray } from "../utils/common/general";
 
 const usePaginatedCats = () => {
   const { catStore } = useContext(CatContext);
@@ -22,7 +23,10 @@ const usePaginatedCats = () => {
         selectedBreed
       );
       if (nextPageRes?.length) {
-        setData((prev) => [...prev, ...nextPageRes]);
+        setData((prev) => {
+          const uniqueArray = returnUniqueArray<CatBreed>(prev, nextPageRes);
+          return uniqueArray;
+        });
       }
     } catch (error) {
       setError(error);

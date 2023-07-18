@@ -1,12 +1,13 @@
 import axios from "axios";
 
-import { CATAPI_DEFAULT_LIMIT, CATAPI_ENDPOINT } from "../../constants/cat";
 import {
-  CatBreedsRequest,
-  CatPageByBreedRequest,
   CatBreedsData,
+  CatBreedsRequest,
   CatPageByBreedData,
+  CatPageByBreedRequest,
 } from "../../types/cat";
+
+import { CATAPI_DEFAULT_LIMIT, CATAPI_ENDPOINT } from "../../constants/cat";
 
 export const getCatBreeds: CatBreedsRequest = async () => {
   const catBreeds: CatBreedsData = await axios.get(`${CATAPI_ENDPOINT}/breeds`);

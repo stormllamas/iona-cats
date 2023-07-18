@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+
 import { DEFAULT_CAT_STORE_VALUE } from "../constants/catStore";
 
 const useCatStore = () => {

@@ -1,7 +1,8 @@
-import { ToastContainer as TContainer } from "react-bootstrap";
-import Toast from "./Toast";
 import { useContext, useEffect } from "react";
+import { ToastContainer as TContainer } from "react-bootstrap";
+
 import { AppContext } from "../../../App";
+import Toast from "./Toast";
 
 const ToastContainer = () => {
   const { appStore } = useContext(AppContext);

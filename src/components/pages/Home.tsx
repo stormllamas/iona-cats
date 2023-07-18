@@ -1,14 +1,13 @@
 import { ChangeEvent, useCallback, useContext, useEffect } from "react";
-import { CatContext } from "../../App";
-
-import { Form, Container, Row, Col, Button } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useLoaderData, useSearchParams } from "react-router-dom";
 
 import { CatBreed } from "../../types/cat";
 
-import CatPreview from "../content/CatPreview";
-
 import usePaginatedCats from "../../customHooks/usePaginatedCats";
+
+import { CatContext } from "../../App";
+import CatPreview from "../content/CatPreview";
 
 const Home = () => {
   const { catStore, updateSelectedBreed, updateCatsByBreedPage } =

@@ -1,6 +1,7 @@
-import { ID } from "../common";
-import { CatDetail, CatBreed } from "../cat";
 import { LoaderFunction } from "react-router-dom";
+
+import { CatBreed, CatDetail } from "../cat";
+import { ID } from "../common";
 
 export type CatBreedsLoaderResponse = Promise<CatBreed[] | undefined>;
 export interface CatBreedsLoader extends LoaderFunction {

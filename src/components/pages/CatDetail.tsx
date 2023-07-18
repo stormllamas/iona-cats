@@ -1,13 +1,15 @@
 import { useContext, useEffect, useMemo, useRef } from "react";
-import { useLoaderData, Link } from "react-router-dom";
-import { CatLoaderResponse } from "../../types/cat";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Link, useLoaderData } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
 
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import { AppContext } from "../../App";
-import { DEFAULT_TOAST_MESSAGE } from "../../constants/appStore";
+import { CatLoaderResponse } from "../../types/cat";
 import { SetTimeoutType } from "../../types/common";
+
+import { DEFAULT_TOAST_MESSAGE } from "../../constants/appStore";
+
+import { AppContext } from "../../App";
 
 const CatDetail = () => {
   const { addToast } = useContext(AppContext);

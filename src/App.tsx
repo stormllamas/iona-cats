@@ -1,24 +1,23 @@
 import { createContext } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-import { CatContextType } from "./types/context/cat";
-import { AppContextType } from "./types/context/app";
-import { DEFAULT_CAT_CONTEXT_VALUE } from "./constants/catStore";
-import { DEFAULT_APP_CONTEXT_VALUE } from "./constants/appStore";
-
 import ThemeProvider from "react-bootstrap/esm/ThemeProvider";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import Home from "./components/pages/Home";
-import CatDetail from "./components/pages/CatDetail";
+import { AppContextType } from "./types/context/app";
+import { CatContextType } from "./types/context/cat";
+
+import { DEFAULT_APP_CONTEXT_VALUE } from "./constants/appStore";
+import { DEFAULT_CAT_CONTEXT_VALUE } from "./constants/catStore";
+
 import ToastContainer from "./components/common/toaster/ToastContainer";
+import CatDetail from "./components/pages/CatDetail";
+import Home from "./components/pages/Home";
+
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import { catBreedsLoader, catLoader } from "./loaders/cat";
+import useAppStore from "./stores/useAppStore";
+import useCatStore from "./stores/useCatStore";
 
 import "./assets/scss/main.scss";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-
-import { catBreedsLoader, catLoader } from "./loaders/cat";
-
-import useCatStore from "./stores/useCatStore";
-import useAppStore from "./stores/useAppStore";
 
 const router = createBrowserRouter([
   {

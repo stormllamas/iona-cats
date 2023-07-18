@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../../App";
+import { Toast as BToast } from "react-bootstrap";
 
-import { DEFAULT_TOAST_TIMEOUT } from "../../../constants/appStore";
 import { ToastType } from "../../../types/context/app";
 
-import { Toast as BToast } from "react-bootstrap";
+import { DEFAULT_TOAST_TIMEOUT } from "../../../constants/appStore";
+
+import { AppContext } from "../../../App";
 
 const Toast = ({ toast }: { toast: ToastType }) => {
   const { removeToast } = useContext(AppContext);

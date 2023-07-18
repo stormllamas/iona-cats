@@ -1,5 +1,6 @@
-import { getCatBreeds, getCatDetail } from "../services/cat";
 import { CatBreedsLoader, CatLoader } from "../types/cat";
+
+import { getCatBreeds, getCatDetail } from "../services/cat";
 
 export const catLoader: CatLoader = async ({ params }) => {
   const catDetail = await getCatDetail(params.catId);

@@ -1,6 +1,8 @@
 import { useCallback, useState } from "react";
-import { DEFAULT_APP_STORE_VALUE } from "../constants/appStore";
+
 import { ToastType } from "../types/context/app";
+
+import { DEFAULT_APP_STORE_VALUE } from "../constants/appStore";
 
 const useAppStore = () => {
   const [appStore, setAppStore] = useState(DEFAULT_APP_STORE_VALUE);

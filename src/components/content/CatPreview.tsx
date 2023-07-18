@@ -1,6 +1,7 @@
-import { Card, Button } from "react-bootstrap";
-import { CatBreed } from "../../types/cat";
+import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+import { CatBreed } from "../../types/cat";
 
 const CatPreview = ({ cat }: { cat: CatBreed }) => {
   return (

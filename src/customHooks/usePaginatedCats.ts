@@ -1,10 +1,14 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 
-import { CatContext } from "../App";
-import { CATAPI_DEFAULT_LIMIT } from "../constants/cat";
-import { getCatPageByBreed } from "../services/cat";
 import { CatBreed } from "../types/cat";
+
+import { CATAPI_DEFAULT_LIMIT } from "../constants/cat";
+
+import { getCatPageByBreed } from "../services/cat";
+
 import { returnUniqueArray } from "../utils/common/general";
+
+import { CatContext } from "../App";
 
 const usePaginatedCats = () => {
   const { catStore, updateEndOfCatsByBreedPage } = useContext(CatContext);

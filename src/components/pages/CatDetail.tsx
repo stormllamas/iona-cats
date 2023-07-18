@@ -1,10 +1,17 @@
-import { useEffect, useMemo } from "react";
+import { useContext, useEffect, useMemo, useRef } from "react";
 import { useLoaderData, Link } from "react-router-dom";
 import { CatLoaderResponse } from "../../types/cat";
 
+import { v4 as uuidv4 } from "uuid";
+
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { AppContext } from "../../App";
+import { DEFAULT_TOAST_MESSAGE } from "../../constants/appStore";
+import { SetTimeoutType } from "../../types/common";
 
 const CatDetail = () => {
+  const { addToast } = useContext(AppContext);
+
   const catDetail = useLoaderData() as CatLoaderResponse;
   const { breeds, url } = catDetail;
 
@@ -15,9 +22,20 @@ const CatDetail = () => {
     return null;
   }, [breeds]);
 
+  // Prevent rerender duplicates
+  const catBreedInfoTimeout = useRef<SetTimeoutType>();
+
   useEffect(() => {
-    console.log("catBreedInfo", catBreedInfo);
-  }, [catBreedInfo]);
+    if (catBreedInfo === null) {
+      clearTimeout(catBreedInfoTimeout.current);
+      catBreedInfoTimeout.current = setTimeout(() => {
+        addToast({
+          id: uuidv4(),
+          message: DEFAULT_TOAST_MESSAGE,
+        });
+      }, 600);
+    }
+  }, [catBreedInfo, addToast]);
 
   return (
     <Container>

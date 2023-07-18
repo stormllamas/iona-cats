@@ -11,7 +11,7 @@ import "./assets/scss/main.scss";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import { catBreedsLoader, catLoader } from "./loaders/cat";
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import {
   DEFAULT_CAT_CONTEXT_VALUE,
   DEFAULT_CAT_STORE_VALUE,
@@ -47,19 +47,19 @@ export const CatContext = createContext<CatContextType>(
 const App = () => {
   const [appStore, setAppStore] = useState(DEFAULT_APP_STORE_VALUE);
 
-  const addToast = (toast: ToastType) => {
+  const addToast = useCallback((toast: ToastType) => {
     setAppStore((prev) => ({
       ...prev,
       toasts: [...prev.toasts, toast],
     }));
-  };
+  }, []);
 
-  const removeToast = (toast: ToastType) => {
+  const removeToast = useCallback((toast: ToastType) => {
     setAppStore((prev) => ({
       ...prev,
       toasts: prev.toasts.filter((t) => t.id !== toast.id),
     }));
-  };
+  }, []);
 
   const appContextValue = {
     appStore,
@@ -69,28 +69,30 @@ const App = () => {
 
   const [catStore, setCatStore] = useState(DEFAULT_CAT_STORE_VALUE);
 
-  const updateSelectedBreed = (selectedBreed: string) => {
+  const updateSelectedBreed = useCallback((selectedBreed: string) => {
     setCatStore((prev) => ({
       ...prev,
       catsByBreedPage: 1,
       selectedBreed,
     }));
-  };
+  }, []);
 
-  const updateCatsByBreedPage = (catsByBreedPage: number) => {
+  const updateCatsByBreedPage = useCallback((catsByBreedPage: number) => {
     setCatStore((prev) => ({
       ...prev,
       catsByBreedPage,
     }));
-  };
+  }, []);
 
-  const updateEndOfCatsByBreedPage = (endOfCatsByBreedPage: boolean) => {
-    setCatStore((prev) => ({
-      ...prev,
-      endOfCatsByBreedPage,
-    }));
-  };
-
+  const updateEndOfCatsByBreedPage = useCallback(
+    (endOfCatsByBreedPage: boolean) => {
+      setCatStore((prev) => ({
+        ...prev,
+        endOfCatsByBreedPage,
+      }));
+    },
+    []
+  );
   const catContextValue = {
     catStore,
     updateSelectedBreed,

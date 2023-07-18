@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     loader: catBreedsLoader,
   },
   {
-    path: "cats/:catId",
+    path: ":catId",
     element: <CatDetail />,
     loader: catLoader,
   },

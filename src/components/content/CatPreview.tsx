@@ -8,7 +8,7 @@ const CatPreview = ({ cat }: { cat: CatBreed }) => {
     <Card>
       <Card.Img variant="top" src={cat.url} />
       <Card.Body>
-        <Link to={`/cats/${cat.id}`}>
+        <Link to={`/${cat.id}`}>
           <Button variant="primary">View Details</Button>
         </Link>
       </Card.Body>

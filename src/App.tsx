@@ -1,27 +1,24 @@
+import { createContext } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import { CatContextType } from "./types/context/cat";
+import { AppContextType } from "./types/context/app";
+import { DEFAULT_CAT_CONTEXT_VALUE } from "./constants/catStore";
+import { DEFAULT_APP_CONTEXT_VALUE } from "./constants/appStore";
 
 import ThemeProvider from "react-bootstrap/esm/ThemeProvider";
 
-import { CatContextType } from "./types/context/cat";
-
 import Home from "./components/pages/Home";
 import CatDetail from "./components/pages/CatDetail";
+import ToastContainer from "./components/common/toaster/ToastContainer";
 
 import "./assets/scss/main.scss";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import { catBreedsLoader, catLoader } from "./loaders/cat";
-import { createContext, useCallback, useState } from "react";
-import {
-  DEFAULT_CAT_CONTEXT_VALUE,
-  DEFAULT_CAT_STORE_VALUE,
-} from "./constants/catStore";
-import { AppContextType, ToastType } from "./types/context/app";
-import {
-  DEFAULT_APP_CONTEXT_VALUE,
-  DEFAULT_APP_STORE_VALUE,
-} from "./constants/appStore";
-import ToastContainer from "./components/common/toaster/ToastContainer";
+
+import useCatStore from "./stores/useCatStore";
+import useAppStore from "./stores/useAppStore";
 
 const router = createBrowserRouter([
   {
@@ -45,60 +42,8 @@ export const CatContext = createContext<CatContextType>(
 );
 
 const App = () => {
-  const [appStore, setAppStore] = useState(DEFAULT_APP_STORE_VALUE);
-
-  const addToast = useCallback((toast: ToastType) => {
-    setAppStore((prev) => ({
-      ...prev,
-      toasts: [...prev.toasts, toast],
-    }));
-  }, []);
-
-  const removeToast = useCallback((toast: ToastType) => {
-    setAppStore((prev) => ({
-      ...prev,
-      toasts: prev.toasts.filter((t) => t.id !== toast.id),
-    }));
-  }, []);
-
-  const appContextValue = {
-    appStore,
-    addToast,
-    removeToast,
-  };
-
-  const [catStore, setCatStore] = useState(DEFAULT_CAT_STORE_VALUE);
-
-  const updateSelectedBreed = useCallback((selectedBreed: string) => {
-    setCatStore((prev) => ({
-      ...prev,
-      catsByBreedPage: 1,
-      selectedBreed,
-    }));
-  }, []);
-
-  const updateCatsByBreedPage = useCallback((catsByBreedPage: number) => {
-    setCatStore((prev) => ({
-      ...prev,
-      catsByBreedPage,
-    }));
-  }, []);
-
-  const updateEndOfCatsByBreedPage = useCallback(
-    (endOfCatsByBreedPage: boolean) => {
-      setCatStore((prev) => ({
-        ...prev,
-        endOfCatsByBreedPage,
-      }));
-    },
-    []
-  );
-  const catContextValue = {
-    catStore,
-    updateSelectedBreed,
-    updateCatsByBreedPage,
-    updateEndOfCatsByBreedPage,
-  };
+  const appContextValue = useAppStore();
+  const catContextValue = useCatStore();
 
   return (
     <AppContext.Provider value={appContextValue}>

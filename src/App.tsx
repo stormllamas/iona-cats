@@ -8,6 +8,7 @@ import { CatContextType } from "./types/context/cat";
 import { DEFAULT_APP_CONTEXT_VALUE } from "./constants/appStore";
 import { DEFAULT_CAT_CONTEXT_VALUE } from "./constants/catStore";
 
+import ErrorPage from "./components/common/error/ErrorPage";
 import ToastContainer from "./components/common/toaster/ToastContainer";
 import CatDetail from "./components/pages/CatDetail";
 import Home from "./components/pages/Home";
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
     loader: catBreedsLoader,
+    errorElement: <ErrorPage />,
   },
   {
     path: ":catId",

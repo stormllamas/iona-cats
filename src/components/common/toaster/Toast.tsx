@@ -16,7 +16,7 @@ const Toast = ({ toast }: { toast: ToastType }) => {
     if (!show) {
       removeToast(toast);
     }
-  }, [show]);
+  }, [show, removeToast, toast]);
 
   return (
     <BToast

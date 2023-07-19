@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo, useRef } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -14,6 +14,7 @@ import { AppContext } from "../../App";
 const CatDetail = () => {
   const { addToast } = useContext(AppContext);
 
+  const navigate = useNavigate();
   const catDetail = useLoaderData() as CatLoaderResponse;
   const { breeds, url } = catDetail;
 
@@ -35,9 +36,10 @@ const CatDetail = () => {
           id: uuidv4(),
           message: DEFAULT_TOAST_MESSAGE,
         });
+        navigate("/");
       }, 600);
     }
-  }, [catBreedInfo, addToast]);
+  }, [catBreedInfo, addToast, navigate]);
 
   return (
     <Container>

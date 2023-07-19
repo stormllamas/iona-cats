@@ -23,7 +23,7 @@ const Home = () => {
     if (queryStringBreed && updateSelectedBreed) {
       updateSelectedBreed(queryStringBreed);
     }
-  }, [searchParams]);
+  }, [searchParams, updateSelectedBreed]);
 
   const {
     loading: catsByBreedLoading,

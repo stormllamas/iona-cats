@@ -27,7 +27,7 @@ export interface CatPageByBreedRequest {
 export interface CatDetail {
   id: string;
   url: string;
-  breeds: CatBreed[];
+  breeds?: CatBreed[];
 }
 
 export type CatDetailParams = ID | undefined;
